@@ -1,0 +1,31 @@
+# Render Blueprint — нужно зайти в render.com -> «New» -> «Blueprint»
+# и указать этот репозиторий. Или создать «Web Service» вручную с этим Dockerfile.
+services:
+  - type: web
+    name: video-translate-bot
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: VT_BOT_TOKEN
+        sync: false   # вводится вручную в Dashboard Render
+      - key: VT_PROVIDER_TOKEN
+        sync: false
+      - key: VT_PAY_CARD
+        value: "2202 2061 6956 5376"
+      - key: VT_WHITELIST
+        value: "835648334,8542930176"
+      - key: VT_WHISPER_MODEL
+        value: small
+      - key: VT_DEVICE
+        value: cpu
+      - key: VT_COMPUTE
+        value: int8
+      - key: VT_POLLING
+        value: "1"
+      - key: VT_DEEPL_KEY
+        sync: false
+    disk:
+      name: bot-data
+      mountPath: /workspace
+      sizeGB: 2

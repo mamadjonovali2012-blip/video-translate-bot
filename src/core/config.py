@@ -60,6 +60,8 @@ class SubscriptionConfig:
     allow_unverified: bool = False
     # Период оплаты в днях; при 0 подписка действует бессрочно (whitelist).
     duration_days: int = 30
+    # Карта для переводов в демо-режиме (когда провайдер не настроен).
+    pay_card: str = "2202 2061 6956 5376"
 
 
 def load_subscription() -> SubscriptionConfig:
@@ -73,6 +75,7 @@ def load_subscription() -> SubscriptionConfig:
         label_prefix=os.getenv("VT_LABEL_PREFIX", "vt"),
         allow_unverified=_bool("VT_ALLOW_UNVERIFIED", False),
         duration_days=_int("VT_DURATION_DAYS", 30),
+        pay_card=os.getenv("VT_PAY_CARD", "2202 2061 6956 5376"),
     )
 
 

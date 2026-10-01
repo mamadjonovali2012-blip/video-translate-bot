@@ -33,13 +33,18 @@ async def cmd_start(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
 
 
 async def cmd_help(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
+    cfg = cfg_of(ctx)
+    pay = ""
+    if not cfg.payments_enabled:
+        pay = f"\nОплата подписки — переводом на карту:\n`{cfg.pay_card}`\n(затем нажмите «Я оплатил(а)» в /buy)"
     await update.effective_chat.send_message(
         "📋 Как пользоваться:\n"
-        "1. Оформите подписку: /buy (200 ₽/мес, кроме paid-programme).\n"
+        f"1. Оформите подписку: /buy (200 ₽/мес, кроме paid-programme).{pay}\n"
         "2. Пришлите видеофайл.\n"
         "3. Выберите язык из списка.\n"
         "4. Через некоторое время получите переведённый ролик.\n\n"
-        "Поддерживается широкий набор языков (whisper + edge-tts)."
+        "Поддерживается широкий набор языков (whisper + edge-tts).",
+        parse_mode="Markdown",
     )
 
 
