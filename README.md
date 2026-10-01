@@ -74,6 +74,41 @@ python src/main.py
 
 ---
 
+## Деплой на Render
+
+Репозиторий: `https://github.com/mamadjonovali2012-blip/video-translate-bot`
+
+Проект готов к деплою на [Render](https://render.com) как Docker-контейнер
+(`Dockerfile` + `render.yaml`).
+
+### Через Blueprint (быстрый старт)
+
+1. Залогиньтесь на render.com.
+2. **New → Blueprint** → укажите репозиторий
+   `mamadjonovali2012-blip/video-translate-bot`.
+3. Render подхватит `render.yaml`, создаст сервис `video-translate-bot`
+   и подключённый диск `/workspace` (2 ГБ).
+4. В **Environment** сервиса задайте секретные переменные:
+   - `VT_BOT_TOKEN` (обязательно) — токен от @BotFather.
+   - `VT_PROVIDER_TOKEN` — токен платёжного провайдера (если используете
+     реальные платежи). Без него работает демо-режим с картой `VT_PAY_CARD`.
+   - `VT_DEEPL_KEY` — ключ DeepL для лучшего качества перевода (опционально).
+5. Нажмите **Deploy**. Whisper-модель скачается при первом запуске
+   (на стартовом плане может занять пару минут).
+
+### Важно про Render
+
+- **План**: whisper `small` + ffmpeg требуют CPU; берите `Starter` (512 MB RAM
+  может не хватить для `small` — лучше `Standard`/`Pro`, или поставьте
+  `VT_WHISPER_MODEL=base`).
+- **Диск**: модели кэшируются в `/workspace/hf`, поэтому нужен постоянный
+  диск — он уже настроен в `render.yaml`.
+- **Polling**: по умолчанию включён long-polling (`VT_POLLING=1`), открытый
+  наружу порт не требуется.
+- Смена переменных окружения → `Save & Redeploy`.
+
+---
+
 ## Структура проекта
 
 ```
@@ -93,6 +128,9 @@ video-translate-bot/
 ├── requirements.txt
 ├── .env.example
 ├── .gitignore
+├── Dockerfile                       # образ для Render
+├── render.yaml                      # Blueprint-конфиг Render
+├── .dockerignore
 └── README.md
 ```
 
