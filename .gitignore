@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.python-version
+
+# Env / secrets
+.env
+.env.local
+*.env
+
+# Work artifacts (скачанные видео, результаты)
+work/
+*.mp4
+*.wav
+*.mp3
+out/
+
+# Tests / tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

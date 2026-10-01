@@ -1,0 +1,21 @@
+# Telegram bot
+python-telegram-bot[job-queue]>=21.0
+
+# STT (распознавание речи)
+faster-whisper>=1.0
+
+# Перевод
+deep-translator>=1.11.4
+# опционально, для лучшего качества (нужен ключ VT_DEEPL_KEY):
+# deepl>=1.18
+
+# TTS (озвучка на целевом языке)
+edge-tts>=6.1
+
+# Микс аудио/видео
+# ffmpeg ставится отдельно из системы (в PATH): https://ffmpeg.org/
+
+# Webhook-режим (опционально)
+fastapi>=0.110
+uvicorn>=0.29
+python-multipart>=0.0.9
